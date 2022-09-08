@@ -13,7 +13,26 @@
 
     <title>Learning AlpineJS</title>
   </head>
+
   <body>
     <h1 x-data="{message:'Hello World'}" x-text="message"></h1>
+
+    <div x-data="{message: 'What is your name?'}">
+      <h3 x-text="message"></h3>
+      <button @click="message= 'My Name is Al Nahian'">See Reply</button>
+    </div>
+
+    <div
+      x-data="{
+        first:0,
+        second:0,
+    }"
+    >
+      <h3>World's Simplest Calculator Ever!</h3>
+      <input type="number" x-model.number="first" /> +
+      <input type="number" x-model.number="second" /> =
+      <output x-text="first + second"></output>
+      <button @click="first = 0, second = 0">Reset</button>
+    </div>
   </body>
 </html>
