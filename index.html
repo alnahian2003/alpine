@@ -71,13 +71,17 @@
     <!-- Toggler -->
     <article
       x-data="{
-      message: 'You Can See Me',
+      message: 'Now You See Me',
       display: false
     }
     "
     >
-      <h1 x-show="display" x-text="message">hey</h1>
-      <button @click="display = !display">Toggle Me</button>
+      <h2>Toggler</h2>
+      <h3 x-show="display" x-text="message"></h3>
+      <button
+        @click="display = !display"
+        x-text="display ? 'Hide 😑':'Show 👀'"
+      ></button>
     </article>
   </body>
 </html>
