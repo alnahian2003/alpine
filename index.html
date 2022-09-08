@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- PicoCSS -->
+    <link rel="stylesheet" href="pico.min.css" />
+
     <!-- AlpineJS -->
     <script
       defer
@@ -14,7 +17,7 @@
     <title>Learning AlpineJS</title>
   </head>
 
-  <body>
+  <body class="container">
     <h1 x-data="{message:'Hello World'}" x-text="message"></h1>
 
     <div x-data="{message: 'What is your name?'}">
@@ -22,17 +25,18 @@
       <button @click="message= 'My Name is Al Nahian'">See Reply</button>
     </div>
 
-    <div
-      x-data="{
-        first:0,
-        second:0,
-    }"
-    >
+    <article x-data="{first:0, second:0,}">
       <h3>World's Simplest Calculator Ever!</h3>
-      <input type="number" x-model.number="first" /> +
-      <input type="number" x-model.number="second" /> =
-      <output x-text="first + second"></output>
-      <button @click="first = 0, second = 0">Reset</button>
-    </div>
+      <nav>
+        <ul>
+          <li><input type="number" x-model.number="first" /></li>
+          <li> + </li>
+          <li><input type="number" x-model.number="second" /></li>
+          <li> = </li>
+          <li><input type="number" :value="first + second" readonly /></li>
+          <li><button @click="first = 0, second = 0">Reset</button></li>
+        </ul>
+      </nav>
+    </article>
   </body>
 </html>
