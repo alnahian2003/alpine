@@ -62,5 +62,17 @@
         </article>
       </dialog>
     </article>
+
+    <!-- Toggler -->
+    <article
+      x-data="{
+      message: 'You Can See Me',
+      display: false
+    }
+    "
+    >
+      <h1 x-show="display" x-text="message">hey</h1>
+      <button @click="display = !display">Toggle Me</button>
+    </article>
   </body>
 </html>
