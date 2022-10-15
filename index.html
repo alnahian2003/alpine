@@ -136,5 +136,55 @@
         </div>
       </div>
     </article>
+
+    <!-- Two Way Data Binding  -->
+    <article
+      x-data="{
+      post: null,
+      
+      form: {
+        title: '',
+        body: '',
+        userId: 1
+      },
+
+      submit(){
+        if(this.form.title == '' && this.form.body == ''){
+         return alert('Cannot leave fields empty');
+        }
+
+        fetch('https://jsonplaceholder.typicode.com/posts', {
+          method: 'POST',
+          headers: {'Content-type':'application/json; charset=UTF-8'},
+          body: JSON.stringify(this.form)
+
+        })
+        .then((response) => response.json())
+        .then(post => this.post = post);
+      }
+  }"
+    >
+      <form @submit.prevent="submit" class="grid">
+        <input
+          type="text"
+          :value="form.title"
+          x-model="form.title"
+          placeholder="Your post title"
+        />
+        <input
+          type="text"
+          :value="form.body"
+          x-model="form.body"
+          placeholder="Your post content"
+        />
+        <input type="submit" value="Send" />
+      </form>
+
+      <div>
+        <template x-if="post">
+          <h2 x-text="post.title"></h2>
+        </template>
+      </div>
+    </article>
   </body>
 </html>
