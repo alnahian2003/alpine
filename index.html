@@ -20,6 +20,10 @@
         border-color: rgb(0, 109, 211);
         box-shadow: none;
       }
+
+      .completed {
+        text-decoration: line-through;
+      }
     </style>
 
     <title>Learning AlpineJS</title>
@@ -182,9 +186,50 @@
 
       <div>
         <template x-if="post">
-          <h2 x-text="post.title"></h2>
+          <div>
+            <h2 x-text="post.title"></h2>
+            <span x-text="post.body"></span>
+          </div>
         </template>
       </div>
+    </article>
+
+    <!-- Simple ToDo List -->
+    <article
+      x-data="{
+      tasks:[],
+      newTask: '',
+    }"
+    >
+      <h2>To Do List</h2>
+      <form
+        @submit.prevent="tasks.push({
+            body: newTask,
+            completed: false
+          });
+          newTask = '';"
+        class="grid"
+      >
+        <input
+          type="text"
+          x-model="newTask"
+          placeholder="What's you're gonna do next?"
+        />
+        <button type="submit">Add</button>
+      </form>
+
+      <ul>
+        <template x-for="(task, index) in tasks" :key="index">
+          <li>
+            <input type="checkbox" id="checkbox" x-model="task.completed" />
+            <label
+              for="checkbox"
+              x-text="task.body"
+              :class="{'completed': task.completed}"
+            ></label>
+          </li>
+        </template>
+      </ul>
     </article>
   </body>
 </html>
