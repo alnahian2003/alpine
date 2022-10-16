@@ -195,21 +195,9 @@
     </article>
 
     <!-- Simple ToDo List -->
-    <article
-      x-data="{
-      tasks:[],
-      newTask: '',
-    }"
-    >
+    <article x-data="taskApp()">
       <h2>To Do List</h2>
-      <form
-        @submit.prevent="tasks.push({
-            body: newTask,
-            completed: false
-          });
-          newTask = '';"
-        class="grid"
-      >
+      <form @submit.prevent="submit" class="grid">
         <input
           type="text"
           x-model="newTask"
@@ -221,15 +209,38 @@
       <ul>
         <template x-for="(task, index) in tasks" :key="index">
           <li>
-            <input type="checkbox" id="checkbox" x-model="task.completed" />
-            <label
-              for="checkbox"
+            <input type="checkbox" x-model="task.completed" />
+            <span
               x-text="task.body"
               :class="{'completed': task.completed}"
-            ></label>
+            ></span>
           </li>
         </template>
       </ul>
     </article>
+
+    <script>
+      const taskApp = () => {
+        return {
+          tasks: [],
+          newTask: "",
+
+          submit() {
+            // validation
+            if (this.newTask == "") {
+              return alert("What's your next task?");
+            }
+
+            this.tasks.push({
+              body: this.newTask,
+              completed: false,
+            });
+
+            // clear the value
+            this.newTask = "";
+          },
+        };
+      };
+    </script>
   </body>
 </html>
